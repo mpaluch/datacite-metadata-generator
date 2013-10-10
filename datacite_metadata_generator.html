@@ -1,0 +1,197 @@
+<!DOCTYPE html><html>
+<!-- DataCite Metadata Generator (Kernel 3.0)-->
+<!-- created: 04/10/2013 paluchm - DataCite Canada -->
+<!-- This form makes uses of styles developed by the wet-boew project (https://github.com/wet-boew/wet-boew)  -->
+<head>
+<meta charset="utf-8" />
+<title></title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">	
+$(document).ready(function(){var c="<?xml version='1.0' encoding='UTF-8'?>"+br()+"<resource xmlns='http://datacite.org/schema/kernel-3' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://datacite.org/schema/kernel-3 http://schema.datacite.org/meta/kernel-3/metadata.xsd'>"+br();document.title="DataCite Metadata Generator - Kernel 3.0";ps($("select#resourcetypegeneral"),resourceType);ps($("select#descriptiontype"),descriptionType);ps($("select#relatedidentifiertype"),relatedIdentifierType); ps($("select#relationtype"),relationType);ps($("select#datetype"),dateType);ps($("select#contributortype"),contributorType);ps($("select#titletype"),titleType);$("h2.pagetitle").text("DataCite Metadata Generator - Kernel 3.0");$("body").on("keyup","input",function(b){b.preventDefault();var a=c;b=$("input#doi").val().encodeXML();a+=dt(b)+br();a+=ot("creators")+br();$("div#creator").each(function(){var b=$(this).find("input#creatorname").val(),c=$(this).find("input#nameidentifier").val(),e=$(this).find("input#nameidentifierscheme").val(), d=$(this).find("input#schemeuri").val();b&&(a+=tab()+ot("creator")+br(),a+=tab()+tab()+ot("creatorName")+b.encodeXML()+ct("creatorName")+br(),c&&(a+=tab()+tab()+"<nameIdentifier nameIdentifierScheme='"+e.encodeXML()+"'",d&&(a+=" schemeURI='"+d.encodeXML()+"'"),a+=">"+c.encodeXML()+ct("nameIdentifier")+br()),a+=tab()+ct("creator")+br())});a+=ct("creators")+br();a+=ot("titles")+br();$("div#title").each(function(){var b=$(this).find("input#title").val(),c=$(this).find("select#titletype option").filter(":selected").val().encodeXML(); b&&(a+=title(b.encodeXML(),c))});var a=a+(ct("titles")+br()),a=a+(ot("publisher")+$("input#publisher").val().encodeXML()+ct("publisher")+br()),a=a+(ot("publicationYear")+$("input#year").val().encodeXML()+ct("publicationYear")+br()),f="";$("div#subject").each(function(){var a=$(this).find("input#subject").val(),b=$(this).find("input#subjectscheme").val(),c=$(this).find("input#schemeuri").val();a&&(f+=sub(a.encodeXML(),b.encodeXML(),c.encodeXML()))});f&&(a+=ot("subjects")+br()+f+ct("subjects")+br()); var e="";$("div#contributor").each(function(){var a=$(this).find("input#contributorname").val(),b=$(this).find("select#contributortype option").filter(":selected").val().encodeXML(),c=$(this).find("input#nameidentifier").val(),d=$(this).find("input#nameidentifierscheme").val(),f=$(this).find("input#schemeuri").val();a&&(e+=tab()+"<contributor contributorType='"+b+"'>"+br(),e+=tab()+tab()+ot("contributorName")+a.encodeXML()+ct("contributorName")+br(),c&&(e+=tab()+tab()+"<nameIdentifier nameIdentifierScheme='"+ d.encodeXML()+"'",f&&(e+=" schemeURI='"+f.encodeXML()+"'"),e+=">"+c.encodeXML()+ct("nameIdentifier")+br()),e+=tab()+ct("contributor")+br())});e&&(a+=ot("contributors")+br()+e+ct("contributors")+br());(b=$("input#language").val())&&(a+=ot("language")+b.encodeXML()+ct("language")+br());var h="";$("div#date").each(function(){var a=$(this).find("input#date").val(),b=$(this).find("select#datetype option").filter(":selected").val().encodeXML();a&&(h+=tab()+"<date dateType='"+b+"'>"+a.encodeXML()+ct("date")+ br())});h&&(a+=ot("dates")+br()+h+ct("dates")+br());b=$("input#resourcetype").val().encodeXML();var d=$("select#resourcetypegeneral option").filter(":selected").val().encodeXML();if(b||d)a+="<resourceType resourceTypeGeneral='"+d+"'>"+b+"</resourceType>"+br();var k="";$("div#alternateid").each(function(){var a=$(this).find("input#alternateid").val(),b=$(this).find("input#alternateidtype").val();a&&(k+=tab()+"<alternateIdentifier alternateIdentifierType='"+b.encodeXML()+"'>"+a.encodeXML()+ct("alternateIdentifier")+ br())});k&&(a+=ot("alternateIdentifiers")+br()+k+ct("alternateIdentifiers")+br());var l="";$("div#relatedid").each(function(){var a=$(this).find("input#relatedid").val(),b=$(this).find("select#relatedidentifiertype option").filter(":selected").val(),c=$(this).find("select#relationtype option").filter(":selected").val(),d=$(this).find("input#relatedmetadatascheme").val(),e=$(this).find("input#schemetype").val(),f=$(this).find("input#schemeuri").val();a&&(l+=relid(a.encodeXML(),b.encodeXML(),c.encodeXML(), d.encodeXML(),e.encodeXML(),f.encodeXML()))});l&&(a+=ot("relatedIdentifiers")+br()+l+ct("relatedIdentifiers")+br());var m="";$("div#size").each(function(){var a=$(this).find("input#size").val();a&&(m+=tab()+ot("size")+a.encodeXML()+ct("size")+br())});m&&(a+=ot("sizes")+br()+m+ct("sizes")+br());var n="";$("div#format").each(function(){var a=$(this).find("input#format").val();a&&(n+=tab()+ot("format")+a.encodeXML()+ct("format")+br())});n&&(a+=ot("formats")+br()+n+ct("formats")+br());(b=$("input#version").val())&& (a+=ot("version")+b.encodeXML()+ct("version")+br());var g="";$("div#rights").each(function(){var a=$(this).find("input#rights").val(),b=$(this).find("input#rightsuri").val();a&&(g+=tab()+"<rights",b&&(g+=" rightsURI='"+b.encodeXML()+"'"),g+=">"+a.encodeXML()+ct("rights")+br())});g&&(a+=ot("rightsList")+br()+g+ct("rightsList")+br());var p="";$("div#description").each(function(){var a=$(this).find("input").val(),b=$(this).find("select option").filter(":selected").val();a&&(p+=desc(a.encodeXML(),b.encodeXML()))}); p&&(a+=ot("descriptions")+br()+p+ct("descriptions")+br());var q="";$("div#geolocation").each(function(){var a="",b=$(this).find("input#geolocationpoint").val(),c=$(this).find("input#geolocationbox").val(),d=$(this).find("input#geolocationplace").val();b&&(a+=tab()+tab()+ot("geoLocationPoint")+b.encodeXML()+ct("geoLocationPoint")+br());c&&(a+=tab()+tab()+ot("geoLocationBox")+c.encodeXML()+ct("geoLocationBox")+br());d&&(a+=tab()+tab()+ot("geoLocationPlace")+d.encodeXML()+ct("geoLocationPlace")+br()); a&&(q+=tab()+ot("geoLocation")+br()+a+tab()+ct("geoLocation")+br())});q&&(a+=ot("geoLocations")+br()+q+ct("geoLocations")+br());a+=ct("resource");$("div.right code").text(a);$(".right").show()});$("body").on("change","select",function(b){b.preventDefault();$("input").eq(0).keyup()});$("#reset").bind("click",function(b){b.preventDefault();location.reload(!0)});$("#selectall").bind("click",function(b){b.preventDefault();st($("div code").get(0))});$("button#add").bind("click",function(b){b.preventDefault(); b=$(this).parent().find("div").eq(0).clone();$(b).find("input,select").val("");$("<button/>",{id:"delete",text:"-"}).appendTo(b);b.appendTo($(this).parent())});$("body").on("click","button#delete",function(b){b.preventDefault();$(this).parent().remove();$("input").eq(0).keyup()});$("body").on("click","button#more",function(b){b.preventDefault();b=$(this).parent();$(b).find("button#more").hide();$(b).find("div#subgroup,button#less").show()});$("body").on("click","button#less",function(b){b.preventDefault(); b=$(this).parent();$(b).find("div#subgroup,button#less").hide();$(b).find("button#more").show();$(b).find("div#subgroup input,div#subgroup select").val("");$("input").eq(0).keyup()});$("body").on("click","h3.recommended,h3.other",function(b){b=$(this).next("div");var a=$(this).html();"+"==a.charAt(0)?(a=a.replace("+","-"),$(this).html(a),$(b).show()):"-"==a.charAt(0)&&(a=a.replace("-","+"),$(this).html(a),$(b).hide())})}); var descriptionType=["Abstract","Methods","SeriesInformation","TableOfContents","Other"],relatedIdentifierType="ARK DOI EAN13 EISSN Handle ISBN ISSN ISTC LISSN LSID PMID PURL UPC URL URN".split(" "),relationType="IsCitedBy Cites IsSupplementTo IsSupplementedBy IsContinuedBy Continues HasMetadata IsMetadataFor IsNewVersionOf IsPreviousVersionOf IsPartOf HasPart IsReferencedBy References IsDocumentedBy Documents IsCompiledBy Compiles IsVariantFormOf IsOriginalFormOf IsIdenticalTo".split(" "),resourceType= "Audiovisual Collection Dataset Event Image InteractiveResource Model PhysicalObject Service Software Sound Text Workflow Other".split(" "),dateType="Accepted Available Copyrighted Collected Created Issued Submitted Updated Valid".split(" "),contributorType="ContactPerson DataCollector DataManager Distributor Editor Funder HostingInstitution Producer ProjectLeader ProjectManager ProjectMember RegistrationAgency RegistrationAuthority RelatedPerson Researcher ResearchGroup RightsHolder Sponsor Supervisor WorkPackageLeader Other".split(" "), titleType=["AlternativeTitle","Subtitle","TranslatedTitle"];function ps(c,b){var a=$(c).attr("title");addO(c,"","["+a+"]");for(a=0;a<b.length;a++)addO(c,b[a],b[a])}function addO(c,b,a){$(c).append($("<option>").val(b).html(a))}function br(){return"\n"}function tab(){return"\t"}function ot(c){return"<"+c+">"}function ct(c){return"</"+c+">"}function title(c,b){var a=tab()+"<title";b&&(a+=" titleType='"+b+"'");return a+=">"+c+ct("title")+br()} function desc(c,b){return tab()+"<description descriptionType='"+b+"'>"+c+ct("description")+br()}function relid(c,b,a,f,e,h){var d=tab(),d=d+"<relatedIdentifier relatedIdentifierType='"+b,d=d+("' relationType='"+a+"'");f&&(d+=" relatedMetadataScheme='"+f+"'",e&&(d+=" schemeType='"+e+"'"),h&&(d+=" schemeURI='"+h+"'"));return d+=">"+c+ct("relatedIdentifier")+br()} function sub(c,b,a){var f=tab()+"<subject";b&&(f+=" subjectScheme='"+b+"'");a&&(f+=" schemeURI='"+a+"'");return f+=">"+c+ct("subject")+br()}function dt(c){return"<identifier identifierType='DOI'>"+c+ct("identifier")}function st(c){var b=document,a;b.body.createTextRange?(b=b.body.createTextRange(),b.moveToElementText(c),b.select()):window.getSelection&&(a=window.getSelection(),b=b.createRange(),b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b))} String.prototype.encodeXML=function(){return this.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;")};
+</script>
+<style>
+body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-field{margin-bottom:2px;width:89%}input.attrib{width:43%}select.attrib{width:45%}.tag{float:left;margin-top:2px;width:80%}div.left{float:left;width:38%}div.right{float:right;width:61%}div.entry{margin-bottom:6px}div.form{padding:12px}div.form div{width:100%}input,select{border-radius:4px;border-style:solid;border-width:1px;margin-bottom:10px;margin-top:0;min-height:18px!important;padding:4px}.right button{margin:2px}button{float:right;font-weight:400}button:hover{background-position:0 -15px;outline-offset:-6px;text-decoration:none;transition:background-position .1s linear 0s}input:focus,select:focus{border-color:#176ca7;box-shadow:0 1px 1px rgba(0,0,0,0.05) inset,0px 0 8px #99cdf1;transition:border .2s linear 0s,box-shadow .2s linear 0s}div.right>div,div.left>div{background:none repeat scroll 0 center #f6f6f6;color:#222222 !important;outline:1px solid gainsboro}div.right h3{background-color:#666666;background-image:linear-gradient(#666666,#545454);background-repeat:repeat-x;background-size:100% auto;border-collapse:collapse;border-spacing:0;border-top-left-radius:4px;border-top-right-radius:4px;color:#ffffff;direction:ltr;font-family:sans-serif;font-size:12.8px;font-weight:700;line-height:19.2px;margin:0 0 1px;padding:5px 10px;text-align:left;text-shadow:#222222 0 1px 1px;vertical-align:bottom}div.left h3{background-color:#176ca7;background-image:linear-gradient(#176ca7,#135888);background-repeat:repeat-x;background-size:100% auto;border-collapse:collapse;border-spacing:0;border-top-left-radius:4px;border-top-right-radius:4px;color:#ffffff;direction:ltr;font-family:sans-serif;font-size:12.8px;font-weight:700;line-height:19.2px;margin:0 0 1px;padding:5px 10px;text-align:left;text-shadow:#222222 0 1px 1px;vertical-align:bottom}h3.recommended:hover,h3.other:hover,button:hover{cursor:pointer}h1,h2{color:#0084B9}span.divider{border-bottom:1px gainsboro solid;float:left;line-height:3px;margin-bottom:5px;width:100%}pre{white-space:pre-wrap;word-wrap:break-word}
+</style>
+</head>
+<body>
+<h2 class="pagetitle"></h2>
+<div class="left">
+<h3 class="mandatory">Mandatory Elements</h3>
+<div class="form mandatory">
+	<div>
+		<span class="tag">DOI:&nbsp;</span>
+		<div id="doi">
+			<input type="text" class="input-field" id="doi" placeholder="[DOI]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="titles">
+		<span class="tag">Title(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="title" class="entry">
+			<input class="input-field" type="text" id="title" placeholder="[TITLE]" value="" />
+			<select class="input-field attrib" id="titletype" title="titleType"></select>
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="creators">
+		<span class="tag">Creator(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="creator" class="entry">
+			<input class="input-field" id="creatorname" type="text" placeholder="[CREATOR NAME]" value="" />
+			<input class="input-field attrib" type="text" id="nameidentifier" placeholder="[NAME IDENTIFIER]" value="" />			
+			<input class="input-field attrib" type="text" id="nameidentifierscheme" placeholder="[NAME ID SCHEME]" value="" />			
+			<input class="input-field" type="text" id="schemeuri" placeholder="[IDENTIFIER SCHEME URI]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div>
+		<span class="tag">Publisher:&nbsp;</span>
+		<div id="publisher">
+			<input type="text" class="input-field" id="publisher" placeholder="[PUBLISHER]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div>
+		<span class="tag">Publication Year:&nbsp;</span>
+		<div class="year">
+			<input type="text" class="input-field" id="year" placeholder="[YYYY]" pattern="[0-9]{4}" value="" />
+		</div>
+	</div>
+</div>
+<h3 class="recommended">+ Recommended Elements</h3>
+<div id="recommended" class="form recommended hidden">
+	<div id="subjects">
+		<span class="tag">Subject(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="subject" class="entry">
+			<input class="input-field attrib" type="text" id="subject" placeholder="[SUBJECT]" value="" />
+			<input class="input-field attrib" title="Subject Scheme" type="text" id="subjectscheme" placeholder="[SUBJECT SCHEME]" value="" />
+			<input class="input-field" type="text" id="schemeuri" placeholder="[SUBJECT SCHEME URI]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="contributors">
+		<span class="tag">Contributor(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="contributor" class="entry">
+			<input class="input-field attrib" type="text" id="contributorname" placeholder="[CONTRIBUTOR NAME]" value="" />
+			<select class="input-field attrib" id="contributortype" title="contributorType"></select>
+			<input class="input-field attrib" type="text" id="nameidentifier" placeholder="[NAME IDENTIFIER]" value="" />
+			<input class="input-field attrib" type="text" id="nameidentifierscheme" placeholder="[NAME ID SCHEME]" value="" />
+			<input class="input-field" type="text" id="schemeuri" placeholder="[IDENTIFIER SCHEME URI]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="dates">
+		<span class="tag">Date(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="date" class="entry">
+			<input class="input-field attrib" id="date" type="text" placeholder="[DATE]" value="" />
+			<select class="input-field attrib" id="datetype" title="dateType"></select>
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div>
+		<span class="tag">Resource Type:&nbsp;</span>
+		<div id="resourcetype" style="float:left;">
+			<input type="text" class="input-field attrib" id="resourcetype" placeholder="[RESOURCE TYPE]" value="" />
+			<select class="input-field attrib" id="resourcetypegeneral" title="resourceTypeGeneral"></select>
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="relatedids">
+		<span class="tag">Related Identifier(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>		
+		<div id="relatedid" class="entry">
+			<input class="input-field" id="relatedid" type="text" placeholder="[RELATED IDENTIFIER]" value="" />
+			<select class="input-field attrib" id="relatedidentifiertype" title="relatedIdentifierType"></select>
+			<select class="input-field attrib" id="relationtype" title="relationType"></select>
+			<input class="input-field attrib" id="relatedmetadatascheme" type="text" placeholder="[METADATA SCHEME]" value="" />
+			<input class="input-field attrib" id="schemetype" type="text" placeholder="[SCHEME TYPE]" value="" />
+			<input class="input-field" type="text" id="schemeuri" placeholder="[SCHEME URI]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="descriptions">
+		<span class="tag">Description:&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="description" class="entry">
+			<input class="input-field" type="text" placeholder="[DESCRIPTION]" value="" />
+			<select class="input-field attrib" id="descriptiontype" title="descriptionType"></select>
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>	
+	<div id="geolocations">
+		<span class="tag">Geo Location:&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="geolocation" class="entry">
+			<input class="input-field attrib" id="geolocationpoint" type="text" placeholder="[GEO LOCATION POINT]" value="" />
+			<input class="input-field attrib" id="geolocationbox" type="text" placeholder="[GEO LOCATION BOX]" value="" />
+			<input class="input-field attrib" id="geolocationplace" type="text" placeholder="[GEO LOCATION PLACE]" value="" />
+		</div>
+	</div>	
+</div>
+<h3 class="other">+ Other Elements</h3>
+<div id="other" class="form other hidden">
+	<div>
+		<span class="tag">Language:&nbsp;</span>
+		<div id="language">
+			<input class="input-field attrib" type="text" id="language" placeholder="[LANGUAGE]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="alternateids">
+		<span class="tag">Alternate Identifier(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>		
+		<div id="alternateid" class="entry">
+			<input class="input-field attrib" id="alternateid" type="text" placeholder="[ALTERNATE IDENTIFIER]" value="" />
+			<input class="input-field attrib" id="alternateidtype" type="text" placeholder="[ALTERNATE ID TYPE]" value="" />
+		</div>
+	</div>	
+	<span class="divider">&nbsp;</span>
+	<div id="sizes">
+		<span class="tag">Size(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="size" class="entry">
+			<input class="input-field" id="size" type="text" placeholder="[SIZE]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="formats">
+		<span class="tag">Format(s):&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="format" class="entry">
+			<input class="input-field" id="format" type="text" placeholder="[FORMAT]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>	
+	<div>
+		<span class="tag">Version:&nbsp;</span>
+		<div id="version" class="entry">
+			<input type="text" class="input-field attrib" id="version" placeholder="[VERSION]" value="" />
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div id="rightslist">
+		<span class="tag">Right List:&nbsp;</span>
+		<button type="button" value="+" id="add">+</button>
+		<div id="rights" class="entry">
+			<input class="input-field" type="text" id="rights" placeholder="[RIGHTS]" value="" />
+			<input class="input-field" type="text" id="rightsuri" placeholder="[RIGHTS URI]" value="" />
+		</div>
+	</div>	
+</div>
+<br />
+</div>
+<div class="right hidden">
+<h3 class="results">Metadata</h3>
+<div class="form results">
+<pre><code style="display:inline-block;"></code></pre>
+</div>
+<br />
+<button type="button" id="reset" value="Reset">Reset</button>
+<button type="button" id="selectall" value="Select All">Select All</button>
+</div>
+</body>
+</html>

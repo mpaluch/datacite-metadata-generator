@@ -24,4 +24,4 @@ Uses:
 
 Notes:
 ======
-- Currently the 'Save to to file' feature does not work in Internet Explorer.
+- Currently the 'save to file' feature does not work in Internet Explorer.

@@ -5,7 +5,7 @@ This is a single HTML form which can be used to generate DataCite Metadata Kerne
 
 Download:
 =========
-[Download Here](https://raw.github.com/mpaluch/datacite-metadata-generator/master/datacite_metadata_generator.html) (right click and 'Save As')  
+[Download Here](https://raw.github.com/mpaluch/datacite-metadata-generator/master/datacite_metadata_generator.html) (right click and use 'Save As', make sure extension is .html)
 
 How to use:
 ===========

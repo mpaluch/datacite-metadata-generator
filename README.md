@@ -10,7 +10,7 @@ Download:
 How to use:
 ===========
 - Download datacite-metadata-generator.html.
-- Open using a browser (Firefox/Chrome recommended, or IE8+).
+- Open using a browser (Firefox/Chrome/Opera recommended, or IE8+).
 - Start creating metadata.
 - Use 'Select All' button to copy and paste results or 'Ready to Save' button to save results to a file.
 
@@ -22,13 +22,12 @@ Uses:
 
 Notes:
 ======
-- Currently the 'save to file' feature does not work in Internet Explorer.
-- Has not been tested in Safari or Opera yet.
+- Currently the 'save to file' feature does not work in Internet Explorer or Safari.
 - The form does not perform any XML validation or validation against the DataCite schema.
 
 To Do:
 ======
-- Enable 'save to file' feature in Internet Explorer.
+- Enable 'save to file' feature in Internet Explorer and Safari.
 - XML and schema validation options.
 - Try to integrate schema documentation to add context to input fields.
 - Modify the implementation to make it more generic.

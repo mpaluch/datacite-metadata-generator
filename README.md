@@ -30,5 +30,4 @@ To Do:
 - Enable 'save to file' feature in Internet Explorer and Safari.
 - XML and schema validation options.
 - Try to integrate schema documentation to add context to input fields.
-- Modify the implementation to make it more generic.
 

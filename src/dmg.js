@@ -1,7 +1,7 @@
 $(document).ready(function() {
-  var kernelVersion = "3.1";
-  var kernelNamespace = "http://datacite.org/schema/kernel-3";
-  var kernelSchema = "http://schema.datacite.org/meta/kernel-3/metadata.xsd";
+  var kernelVersion = "4.0";
+  var kernelNamespace = "http://datacite.org/schema/kernel-4";
+  var kernelSchema = "http://schema.datacite.org/meta/kernel-4/metadata.xsd";
   var kernelSchemaLocation = kernelNamespace + " " + kernelSchema;
   var header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + br() + "<resource xmlns=\"" + kernelNamespace + "\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"" + kernelSchemaLocation + "\">" + br();
   $("select[title]").each(function(){
@@ -57,7 +57,7 @@ $(document).ready(function() {
     var c = $(this).parent().clone();
     $(c).find("input,select").val("");
     $(this).before($("<button/>", {"class":"delete single-tag", type:"button", text:"-"}));
-    c.appendTo($(this).parent().parent());
+    c.insertAfter($(this).parent());
     $(this).remove();
   });
   $("body").on("click", "button.delete.single-tag", function(event) {
@@ -97,15 +97,16 @@ $(document).ready(function() {
 });
 
 var optionValues = {};
-optionValues["descriptionType"] = ["Abstract", "Methods", "SeriesInformation", "TableOfContents", "Other"];
-optionValues["relatedIdentifierType"] = ["ARK", "arXiv", "bibcode", "DOI", "EAN13", "EISSN", "Handle", "ISBN", "ISSN", "ISTC", "LISSN", "LSID", "PMID", "PURL", "UPC", "URL", "URN"];
-optionValues["relationType"] = ["IsCitedBy", "Cites", "IsSupplementTo", "IsSupplementedBy", "IsContinuedBy", "Continues", "IsNewVersionOf", "IsPreviousVersionOf", "IsPartOf", "HasPart", "IsReferencedBy", "References", "IsDocumentedBy", "Documents", "IsCompiledBy", "Compiles", "IsVariantFormOf", "IsOriginalFormOf", "IsIdenticalTo", "HasMetadata", "IsMetadataFor", "Reviews", "IsReviewedBy", "IsDerivedFrom", "IsSourceOf"];
+optionValues["descriptionType"] = ["Abstract", "Methods", "SeriesInformation", "TableOfContents", "TechnicalInfo", "Other"];
+optionValues["relatedIdentifierType"] = ["ARK", "arXiv", "bibcode", "DOI", "EAN13", "EISSN", "Handle", "IGSN", "ISBN", "ISSN", "ISTC", "LISSN", "LSID", "PMID", "PURL", "UPC", "URL", "URN"];
+optionValues["relationType"] = ["IsCitedBy", "Cites", "IsSupplementTo", "IsSupplementedBy", "IsContinuedBy", "Continues", "HasMetadata", "IsMetadataFor","IsNewVersionOf", "IsPreviousVersionOf", "IsPartOf", "HasPart", "IsReferencedBy", "References", "IsDocumentedBy", "Documents", "IsCompiledBy", "Compiles", "IsVariantFormOf", "IsOriginalFormOf", "IsIdenticalTo", "IsReviewedBy", "Reviews", "IsDerivedFrom", "IsSourceOf"];
 optionValues["resourceTypeGeneral"] = ["Audiovisual", "Collection", "Dataset", "Event", "Image", "InteractiveResource", "Model", "PhysicalObject", "Service", "Software", "Sound", "Text", "Workflow", "Other"];
 optionValues["dateType"] = ["Accepted", "Available", "Copyrighted", "Collected", "Created", "Issued", "Submitted", "Updated", "Valid"];
-optionValues["contributorType"] = ["ContactPerson", "DataCollector", "DataCurator", "DataManager", "Distributor", "Editor", "Funder", "HostingInstitution", "Other", "Producer", "ProjectLeader", "ProjectManager", "ProjectMember", "RegistrationAgency", "RegistrationAuthority", "RelatedPerson", "Researcher", "ResearchGroup", "RightsHolder", "Sponsor", "Supervisor", "WorkPackageLeader"];
-optionValues["titleType"] = ["AlternativeTitle", "Subtitle", "TranslatedTitle"];
+optionValues["contributorType"] = ["ContactPerson", "DataCollector", "DataCurator", "DataManager", "Distributor", "Editor", "HostingInstitution", "Producer", "ProjectLeader", "ProjectManager", "ProjectMember", "RegistrationAgency", "RegistrationAuthority", "RelatedPerson", "Researcher", "ResearchGroup", "RightsHolder", "Sponsor", "Supervisor", "WorkPackageLeader", "Other"];
+optionValues["titleType"] = ["AlternativeTitle", "Subtitle", "TranslatedTitle", "Other"];
+optionValues["funderIdentifierType"] = ["Crossref Funder ID", "GRID", "ISNI", "Other"];
 
-function process(section){		
+function process(section){
 	var isWrapper = $(section).hasClass("wrapper-tag");
 	var indent = 0;
 	var xml = "";
@@ -118,7 +119,7 @@ function process(section){
 		xml += processTag(this,indent);
 	})
 	
-	if (xml.length > 0){		
+	if (xml.length > 0){
 		if (isWrapper){
 			var wrapperName = name(section);
 			xml = ot(wrapperName) + br() + xml + ct(wrapperName) + br();
@@ -128,7 +129,7 @@ function process(section){
 	return xml;
 }
 
-function processTag(tag, indent){		
+function processTag(tag, indent){
 	var xml = "";
 	var attributes;
 	var value;
@@ -136,32 +137,31 @@ function processTag(tag, indent){
 	var attr = attribs(tag);
 	
 	var tagValues = $(tag).children(".tag-value");
-	var tagChildren = $(tag).children(".tag");
 	
 	if ($(tagValues).length){
 		value = inputValue(tagValues[0]);
-	}	 
+	}
 
-	$(tag).find(".tag").each(function(){
-		xml += processTag(this,indent + 1);		
+	$(tag).children(".tag").each(function(){
+		xml += processTag(this,indent + 1);
 	});
-		
+	
 	if (xml.length > 0){
 		xml = tab(indent) + ota(tagName,attr) + br() + xml + tab(indent) + ct(tagName) + br();
 	}
 	else if(typeof value !== "undefined" && value.length > 0){
 		xml = tab(indent) + ota(tagName,attr) + value + ct(tagName) + br();
 	}
-		
+	
 	return xml;
 }
 
-function attribs(element){	
+function attribs(element){
 	var attribs = "";
 	
 	$(element).children(".tag-attribute").each(function(){
 		var value = "";
-		var n = name(this);				
+		var n = name(this);
 		
 		if ( $(this).is("input") ){
 			value = inputValue(this);

@@ -19,6 +19,9 @@ body {
 input.half-width {
 	width: 43%;
 }
+input.half-width-smaller {
+	width: 41%;
+}
 select.half-width {
 	width: 45%;
 }

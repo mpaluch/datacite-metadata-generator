@@ -1,25 +1,26 @@
 <!DOCTYPE html><html>
-<!-- DataCite Metadata Generator (Kernel 3.1)-->
+<!-- DataCite Metadata Generator (Kernel 4.0)-->
 <!-- created: 2013-10-04 paluchm - DataCite Canada -->
 <!-- modified: 2015-02-04 paluchm - Updated to Kernel 3.1 -->
 <!-- modified: 2015-11-01 paluchm - Fixed HTML validation problems. Modified implementation so that new XML tags can be generated just by adding HTML elements with proper names and classes. -->
 <!-- modified: 2016-01-09 paluchm - Fixed rightsList tag name. -->
+<!-- modified: 2017-02-12 paluchm - Updated to Kernel 4.0 and JQuery 3 -->
 <!-- This form makes use of styles developed by the wet-boew project (https://github.com/wet-boew/wet-boew)  -->
 <!-- Recommended browsers are Firefox or Chrome. Minimum supported IE version is 8 (save feature currently not supported in IE)-->
 <head>
 <meta charset="utf-8" />
-<title>DataCite Metadata Generator - Kernel 3.1</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<title>DataCite Metadata Generator - Kernel 4.0</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){var kernelVersion="3.1";var kernelNamespace="http://datacite.org/schema/kernel-3";var kernelSchema="http://schema.datacite.org/meta/kernel-3/metadata.xsd";var kernelSchemaLocation=kernelNamespace+" "+kernelSchema;var header="<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+br()+"<resource xmlns=\""+kernelNamespace+"\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\""+kernelSchemaLocation+"\">"+br();$("select[title]").each(function(){var tagName=name($(this));ps($(this),optionValues[tagName])});$("body").on("keyup","input",function(event){event.preventDefault();var xml=header;$("div.section").each(function(){xml+=process($(this))});xml+=ct("resource");metadata=xml;$("div.right code").text(xml);$(".right").show()});$("body").on("change","select",function(event){event.preventDefault();$("input").eq(0).keyup()});$("#reset").bind("click",function(event){event.preventDefault();location.reload(true)});$("#selectall").bind("click",function(event){event.preventDefault();st($("div code").get(0))});$("button.add.group").bind("click",function(event){event.preventDefault();var d=$(this).parent().find(".tag-group:first").clone();$(d).find("input,select").val("");$(d).find("input + button.delete.element").each(function(){$(this).prev("input").remove();$(this).remove()});$("<button/>",{"class":"delete group",type:"button",text:"-"}).appendTo($(d).find(".tag:first"));d.appendTo($(this).parent())});$("div.section").on("mouseenter mouseleave focusin focusout","button.delete.group, button.delete.single-tag",function(event){event.preventDefault();$(this).parent().toggleClass("remove-highlight")});$("div.section").on("click","button.delete.group",function(event){event.preventDefault();$(this).parent().remove();$("input").eq(0).keyup()});$("body").on("click"," button.add.single-tag",function(event){event.preventDefault();var c=$(this).parent().clone();$(c).find("input,select").val("");$(this).before($("<button/>",{"class":"delete single-tag",type:"button",text:"-"}));c.appendTo($(this).parent().parent());$(this).remove()});$("body").on("click","button.delete.single-tag",function(event){event.preventDefault();$(this).parent().remove();$("input").eq(0).keyup()});$("body").on("click","button#more",function(event){event.preventDefault();var div=$(this).parent();$(div).find("button#more").hide();$(div).find("div#subgroup,button#less").show()});$("body").on("click","button#less",function(event){event.preventDefault();var div=$(this).parent();$(div).find("div#subgroup,button#less").hide();$(div).find("button#more").show();$(div).find("div#subgroup input,div#subgroup select").val("");$("input").eq(0).keyup()});$("body").on("click","h3.recommended,h3.other",function(event){var div=$(this).next("div");var text=$(this).html();if(text.charAt(0)=="+"){text=text.replace("+","-");$(this).html(text);$(div).show()}else{if(text.charAt(0)=="-"){text=text.replace("-","+");$(this).html(text);$(div).hide()}}})});var optionValues={};optionValues["descriptionType"]=["Abstract","Methods","SeriesInformation","TableOfContents","Other"];optionValues["relatedIdentifierType"]=["ARK","arXiv","bibcode","DOI","EAN13","EISSN","Handle","ISBN","ISSN","ISTC","LISSN","LSID","PMID","PURL","UPC","URL","URN"];optionValues["relationType"]=["IsCitedBy","Cites","IsSupplementTo","IsSupplementedBy","IsContinuedBy","Continues","IsNewVersionOf","IsPreviousVersionOf","IsPartOf","HasPart","IsReferencedBy","References","IsDocumentedBy","Documents","IsCompiledBy","Compiles","IsVariantFormOf","IsOriginalFormOf","IsIdenticalTo","HasMetadata","IsMetadataFor","Reviews","IsReviewedBy","IsDerivedFrom","IsSourceOf"];optionValues["resourceTypeGeneral"]=["Audiovisual","Collection","Dataset","Event","Image","InteractiveResource","Model","PhysicalObject","Service","Software","Sound","Text","Workflow","Other"];optionValues["dateType"]=["Accepted","Available","Copyrighted","Collected","Created","Issued","Submitted","Updated","Valid"];optionValues["contributorType"]=["ContactPerson","DataCollector","DataCurator","DataManager","Distributor","Editor","Funder","HostingInstitution","Other","Producer","ProjectLeader","ProjectManager","ProjectMember","RegistrationAgency","RegistrationAuthority","RelatedPerson","Researcher","ResearchGroup","RightsHolder","Sponsor","Supervisor","WorkPackageLeader"];optionValues["titleType"]=["AlternativeTitle","Subtitle","TranslatedTitle"];function process(section){var isWrapper=$(section).hasClass("wrapper-tag");var indent=0;var xml="";if(isWrapper){indent=1}$(section).find(".tag-group>.tag").each(function(){xml+=processTag(this,indent)});if(xml.length>0){if(isWrapper){var wrapperName=name(section);xml=ot(wrapperName)+br()+xml+ct(wrapperName)+br()}}return xml}function processTag(tag,indent){var xml="";var attributes;var value;var tagName=name(tag);var attr=attribs(tag);var tagValues=$(tag).children(".tag-value");var tagChildren=$(tag).children(".tag");if($(tagValues).length){value=inputValue(tagValues[0])}$(tag).find(".tag").each(function(){xml+=processTag(this,indent+1)});if(xml.length>0){xml=tab(indent)+ota(tagName,attr)+br()+xml+tab(indent)+ct(tagName)+br()}else if(typeof value!=="undefined"&&value.length>0){xml=tab(indent)+ota(tagName,attr)+value+ct(tagName)+br()}return xml}function attribs(element){var attribs="";$(element).children(".tag-attribute").each(function(){var value="";var n=name(this);if($(this).is("input")){value=inputValue(this)}if($(this).is("select")){value=selectValue(this)}if(value.length>0){if(attribs.length>0){attribs+=" "}attribs+=n+"=\""+value+"\""}});return attribs}function inputValue(input){return $(input).val().encodeXML()}function selectValue(select){return $(select).find("option").filter(":selected").val().encodeXML()}function name(tag){return $(tag).attr("title")}function ps(s,sarr){var i=$(s).attr("title");addO(s,"","["+i+"]");for(var i=0;i<sarr.length;i+=1){addO(s,sarr[i],sarr[i])}}function addO(s,v,d){$(s).append($("<option>").val(v).html(d))}function br(){return "\n"}function tab(number){var tabs="";if(typeof number!=="undefined"){for(var i=1;i<=number;i+=1){tabs+="\t"}}else{tabs="\t"}return tabs}function ota(tag,attr){if(attr.length>0){return "<"+tag+" "+attr+">"}else{return ot(tag)}}function ot(tag){return "<"+tag+">"}function ct(tag){return "</"+tag+">"}function st(element){var doc=document,text=element,range,selection;if(doc.body.createTextRange){range=doc.body.createTextRange();range.moveToElementText(text);range.select()}else{if(window.getSelection){selection=window.getSelection();range=doc.createRange();range.selectNodeContents(text);selection.removeAllRanges();selection.addRange(range)}}}String.prototype.encodeXML=function(){return this.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;")};var metadata="";var MIME_TYPE="application/xml";var cleanUp=function(a){setTimeout(function(){window.URL.revokeObjectURL(a.href)},1500);$("span#output").html("")};var downloadFile=function(){window.URL=window.webkitURL||window.URL;var prevLink=$("span#output a");if(prevLink){$("span#output").html("")}var bb=new Blob([metadata],{type:MIME_TYPE});var a=document.createElement("a");a.download="metadata.xml";a.href=window.URL.createObjectURL(bb);a.textContent="Click here to Save: metadata.xml";a.setAttribute("data-downloadurl",[MIME_TYPE,a.download,a.href].join(":"));a.classList.add("button");a.onclick=function(e){if($(this).is(":disabled")){return false}cleanUp(this)};$(a).appendTo($("span#output"))};function save(){if(false){alert("Not currently supported in Internet Explorer")}else{downloadFile()}};
+$(document).ready(function(){var kernelVersion="4.0";var kernelNamespace="http://datacite.org/schema/kernel-4";var kernelSchema="http://schema.datacite.org/meta/kernel-4/metadata.xsd";var kernelSchemaLocation=kernelNamespace+" "+kernelSchema;var header="<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+br()+"<resource xmlns=\""+kernelNamespace+"\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\""+kernelSchemaLocation+"\">"+br();$("select[title]").each(function(){var tagName=name($(this));ps($(this),optionValues[tagName])});$("body").on("keyup","input",function(event){event.preventDefault();var xml=header;$("div.section").each(function(){xml+=process($(this))});xml+=ct("resource");metadata=xml;$("div.right code").text(xml);$(".right").show()});$("body").on("change","select",function(event){event.preventDefault();$("input").eq(0).keyup()});$("#reset").bind("click",function(event){event.preventDefault();location.reload(true)});$("#selectall").bind("click",function(event){event.preventDefault();st($("div code").get(0))});$("button.add.group").bind("click",function(event){event.preventDefault();var d=$(this).parent().find(".tag-group:first").clone();$(d).find("input,select").val("");$(d).find("input + button.delete.element").each(function(){$(this).prev("input").remove();$(this).remove()});$("<button/>",{"class":"delete group",text:"-",type:"button"}).appendTo($(d).find(".tag:first"));d.appendTo($(this).parent())});$("div.section").on("mouseenter mouseleave focusin focusout","button.delete.group, button.delete.single-tag",function(event){event.preventDefault();$(this).parent().toggleClass("remove-highlight")});$("div.section").on("click","button.delete.group",function(event){event.preventDefault();$(this).parent().remove();$("input").eq(0).keyup()});$("body").on("click"," button.add.single-tag",function(event){event.preventDefault();var c=$(this).parent().clone();$(c).find("input,select").val("");$(this).before($("<button/>",{"class":"delete single-tag",text:"-",type:"button"}));c.insertAfter($(this).parent());$(this).remove()});$("body").on("click","button.delete.single-tag",function(event){event.preventDefault();$(this).parent().remove();$("input").eq(0).keyup()});$("body").on("click","button#more",function(event){event.preventDefault();var div=$(this).parent();$(div).find("button#more").hide();$(div).find("div#subgroup,button#less").show()});$("body").on("click","button#less",function(event){event.preventDefault();var div=$(this).parent();$(div).find("div#subgroup,button#less").hide();$(div).find("button#more").show();$(div).find("div#subgroup input,div#subgroup select").val("");$("input").eq(0).keyup()});$("body").on("click","h3.recommended,h3.other",function(event){var div=$(this).next("div");var text=$(this).html();if(text.charAt(0)=="+"){text=text.replace("+","-");$(this).html(text);$(div).show()}else{if(text.charAt(0)=="-"){text=text.replace("-","+");$(this).html(text);$(div).hide()}}})});var optionValues={};optionValues["descriptionType"]=["Abstract","Methods","SeriesInformation","TableOfContents","TechnicalInfo","Other"];optionValues["relatedIdentifierType"]=["ARK","arXiv","bibcode","DOI","EAN13","EISSN","Handle","IGSN","ISBN","ISSN","ISTC","LISSN","LSID","PMID","PURL","UPC","URL","URN"];optionValues["relationType"]=["IsCitedBy","Cites","IsSupplementTo","IsSupplementedBy","IsContinuedBy","Continues","HasMetadata","IsMetadataFor","IsNewVersionOf","IsPreviousVersionOf","IsPartOf","HasPart","IsReferencedBy","References","IsDocumentedBy","Documents","IsCompiledBy","Compiles","IsVariantFormOf","IsOriginalFormOf","IsIdenticalTo","IsReviewedBy","Reviews","IsDerivedFrom","IsSourceOf"];optionValues["resourceTypeGeneral"]=["Audiovisual","Collection","Dataset","Event","Image","InteractiveResource","Model","PhysicalObject","Service","Software","Sound","Text","Workflow","Other"];optionValues["dateType"]=["Accepted","Available","Copyrighted","Collected","Created","Issued","Submitted","Updated","Valid"];optionValues["contributorType"]=["ContactPerson","DataCollector","DataCurator","DataManager","Distributor","Editor","HostingInstitution","Producer","ProjectLeader","ProjectManager","ProjectMember","RegistrationAgency","RegistrationAuthority","RelatedPerson","Researcher","ResearchGroup","RightsHolder","Sponsor","Supervisor","WorkPackageLeader","Other"];optionValues["titleType"]=["AlternativeTitle","Subtitle","TranslatedTitle","Other"];optionValues["funderIdentifierType"]=["Crossref Funder ID","GRID","ISNI","Other"];function process(section){var isWrapper=$(section).hasClass("wrapper-tag");var indent=0;var xml="";if(isWrapper){indent=1}$(section).find(".tag-group>.tag").each(function(){xml+=processTag(this,indent)});if(xml.length>0){if(isWrapper){var wrapperName=name(section);xml=ot(wrapperName)+br()+xml+ct(wrapperName)+br()}}return xml}function processTag(tag,indent){var xml="";var attributes;var value;var tagName=name(tag);var attr=attribs(tag);var tagValues=$(tag).children(".tag-value");if($(tagValues).length){value=inputValue(tagValues[0])}$(tag).children(".tag").each(function(){xml+=processTag(this,indent+1)});if(xml.length>0){xml=tab(indent)+ota(tagName,attr)+br()+xml+tab(indent)+ct(tagName)+br()}else if(typeof value!=="undefined"&&value.length>0){xml=tab(indent)+ota(tagName,attr)+value+ct(tagName)+br()}return xml}function attribs(element){var attribs="";$(element).children(".tag-attribute").each(function(){var value="";var n=name(this);if($(this).is("input")){value=inputValue(this)}if($(this).is("select")){value=selectValue(this)}if(value.length>0){if(attribs.length>0){attribs+=" "}attribs+=n+"=\""+value+"\""}});return attribs}function inputValue(input){return $(input).val().encodeXML()}function selectValue(select){return $(select).find("option").filter(":selected").val().encodeXML()}function name(tag){return $(tag).attr("title")}function ps(s,sarr){var i=$(s).attr("title");addO(s,"","["+i+"]");for(var i=0;i<sarr.length;i+=1){addO(s,sarr[i],sarr[i])}}function addO(s,v,d){$(s).append($("<option>").val(v).html(d))}function br(){return "\n"}function tab(number){var tabs="";if(typeof number!=="undefined"){for(var i=1;i<=number;i+=1){tabs+="\t"}}else{tabs="\t"}return tabs}function ota(tag,attr){if(attr.length>0){return "<"+tag+" "+attr+">"}else{return ot(tag)}}function ot(tag){return "<"+tag+">"}function ct(tag){return "</"+tag+">"}function st(element){var doc=document,text=element,range,selection;if(doc.body.createTextRange){range=doc.body.createTextRange();range.moveToElementText(text);range.select()}else{if(window.getSelection){selection=window.getSelection();range=doc.createRange();range.selectNodeContents(text);selection.removeAllRanges();selection.addRange(range)}}}String.prototype.encodeXML=function(){return this.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;")};var metadata="";var MIME_TYPE="application/xml";var cleanUp=function(a){setTimeout(function(){window.URL.revokeObjectURL(a.href)},1500);$("span#output").html("")};var downloadFile=function(){window.URL=window.webkitURL||window.URL;var prevLink=$("span#output a");if(prevLink){$("span#output").html("")}var bb=new Blob([metadata],{type:MIME_TYPE});var a=document.createElement("a");a.download="metadata.xml";a.href=window.URL.createObjectURL(bb);a.textContent="Click here to Save: metadata.xml";a.setAttribute("data-downloadurl",[MIME_TYPE,a.download,a.href].join(":"));a.classList.add("button");a.onclick=function(e){if($(this).is(":disabled")){return false}cleanUp(this)};$(a).appendTo($("span#output"))};function save(){if(false){alert("Not currently supported in Internet Explorer")}else{downloadFile()}};
 </script>
 <!--[if IE]><script>function save(){alert("Not currently supported in Internet Explorer");}</script><![endif]-->
 <style>
-body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-field{margin-bottom:2px}.unbounded-width{width:79%}.full-width{width:89%}input.half-width{width:43%}select.half-width{width:45%}.tag-group-label{float:left;margin-top:2px;width:80%}.left{float:left}.right{float:right}div.left{width:38%}div.right{width:61%}div.form{padding:12px}div.form div{width:100%;display:inline}div.tag{margin-bottom:4px}div.tag-group input:nth-last-of-type(1),div.tag-group select:nth-last-of-type(1){margin-bottom:8px}input,select{border-radius:4px;border-style:solid;border-width:1px;margin-bottom:2px;margin-top:0;min-height:18px!important;padding:4px}.right button{margin:2px;float:right}button.add,button.delete{width:1.8em;font-weight:400;margin-left:4px}button.group{float:right;margin-top:3px}button.element{margin-left:5px}button:hover{background-position:0 -15px;outline-offset:-6px;text-decoration:none;transition:background-position 0.1s linear 0s}input:focus,select:focus{border-color:#176ca7;box-shadow:0 1px 1px rgba(0, 0, 0, 0.05) inset, 0 0 8px #99cdf1;transition:border 0.2s linear 0s, box-shadow 0.2s linear 0s}div.right>div,div.left>div{background:none repeat scroll 0 center #f6f6f6;color:#222 !important;outline:1px solid gainsboro}div.right h3{background-color:#666;background-image:linear-gradient(#666666, #545454);background-repeat:repeat-x;background-size:100% auto;border-collapse:collapse;border-spacing:0;border-top-left-radius:4px;border-top-right-radius:4px;color:#fff;direction:ltr;font-family:sans-serif;font-size:12.8px;font-weight:700;line-height:19.2px;margin:0 0 1px;padding:5px 10px;text-align:left;text-shadow:#222 0 1px 1px;vertical-align:bottom}div.left h3{background-color:#176ca7;background-image:linear-gradient(#176ca7, #135888);background-repeat:repeat-x;background-size:100% auto;border-collapse:collapse;border-spacing:0;border-top-left-radius:4px;border-top-right-radius:4px;color:#fff;direction:ltr;font-family:sans-serif;font-size:12.8px;font-weight:700;line-height:19.2px;margin:0 0 1px;padding:5px 10px;text-align:left;text-shadow:#222 0 1px 1px;vertical-align:bottom}.remove-highlight input,.remove-highlight select{border-color:rgb(239, 6, 6);border-style:solid;border-width:1px;border-radius:5px;-webkit-transition:all 0.1s linear 0s, border-color 0s;transition:all 0.1s linear 0s, border-color 0s}h3.recommended:hover,h3.other:hover,button:hover{cursor:pointer}h1,h2{color:#0084b9}span.divider{border-bottom:1px gainsboro solid;float:left;line-height:3px;margin-bottom:5px;width:100%}pre{white-space:pre-wrap;word-wrap:break-word}span.output{float:left}a.button{-moz-text-blink:none;-moz-text-decoration-color:#fff;-moz-text-decoration-line:none;-moz-text-decoration-style:solid;background-color:#176ca7;background-image:linear-gradient(#176ca7, #114f7a);background-repeat:repeat-x;background-size:100% auto;border-bottom-color:#0b324d;border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom-style:solid;border-bottom-width:1px;border-collapse:collapse;border-left-color:#0e4164;border-left-style:solid;border-left-width:1px;border-right-color:#0e4164;border-right-style:solid;border-right-width:1px;border-spacing:0;border-top-color:#0e4164;border-top-left-radius:4px;border-top-right-radius:4px;border-top-style:solid;border-top-width:1px;box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0 0 inset, rgba(0, 0, 0, 0.05) 0 1px 2px 0;color:#fff;cursor:pointer;direction:ltr;display:inline-block;font-family:Arial, Verdana, Helvetica, sans-serif;font-size:13.3333px;font-weight:400;line-height:16px;padding:4px 10px;text-align:center;text-decoration:none;text-shadow:#222 0 1px 1px;vertical-align:middle}
+body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-field{margin-bottom:2px}.unbounded-width{width:79%}.full-width{width:89%}input.half-width{width:43%}input.half-width-smaller{width:41%}select.half-width{width:45%}.tag-group-label{float:left;margin-top:2px;width:80%}.left{float:left}.right{float:right}div.left{width:38%}div.right{width:61%}div.form{padding:12px}div.form div{width:100%;display:inline}div.tag{margin-bottom:4px}div.tag-group input:nth-last-of-type(1),div.tag-group select:nth-last-of-type(1){margin-bottom:8px}input,select{border-radius:4px;border-style:solid;border-width:1px;margin-bottom:2px;margin-top:0;min-height:18px!important;padding:4px}.right button{margin:2px;float:right}button.add,button.delete{width:1.8em;font-weight:400;margin-left:4px}button.group{float:right;margin-top:3px}button.element{margin-left:5px}button:hover{background-position:0 -15px;outline-offset:-6px;text-decoration:none;transition:background-position 0.1s linear 0s}input:focus,select:focus{border-color:#176ca7;box-shadow:0 1px 1px rgba(0, 0, 0, 0.05) inset, 0 0 8px #99cdf1;transition:border 0.2s linear 0s, box-shadow 0.2s linear 0s}div.left > div,div.right > div{background:none repeat scroll 0 center #f6f6f6;color:#222 !important;outline:1px solid gainsboro}div.right h3{background-color:#666;background-image:linear-gradient(#666666, #545454);background-repeat:repeat-x;background-size:100% auto;border-collapse:collapse;border-spacing:0;border-top-left-radius:4px;border-top-right-radius:4px;color:#fff;direction:ltr;font-family:sans-serif;font-size:12.8px;font-weight:700;line-height:19.2px;margin:0 0 1px;padding:5px 10px;text-align:left;text-shadow:#222 0 1px 1px;vertical-align:bottom}div.left h3{background-color:#176ca7;background-image:linear-gradient(#176ca7, #135888);background-repeat:repeat-x;background-size:100% auto;border-collapse:collapse;border-spacing:0;border-top-left-radius:4px;border-top-right-radius:4px;color:#fff;direction:ltr;font-family:sans-serif;font-size:12.8px;font-weight:700;line-height:19.2px;margin:0 0 1px;padding:5px 10px;text-align:left;text-shadow:#222 0 1px 1px;vertical-align:bottom}.remove-highlight input,.remove-highlight select{border-color:rgb(239, 6, 6);border-style:solid;border-width:1px;border-radius:5px;-webkit-transition:all 0.1s linear 0s, border-color 0s;transition:all 0.1s linear 0s, border-color 0s}button:hover,h3.other:hover,h3.recommended:hover{cursor:pointer}h1,h2{color:#0084b9}span.divider{border-bottom:1px gainsboro solid;float:left;line-height:3px;margin-bottom:5px;width:100%}pre{white-space:pre-wrap;word-wrap:break-word}span.output{float:left}a.button{-moz-text-blink:none;-moz-text-decoration-color:#fff;-moz-text-decoration-line:none;-moz-text-decoration-style:solid;background-color:#176ca7;background-image:linear-gradient(#176ca7, #114f7a);background-repeat:repeat-x;background-size:100% auto;border-bottom-color:#0b324d;border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom-style:solid;border-bottom-width:1px;border-collapse:collapse;border-left-color:#0e4164;border-left-style:solid;border-left-width:1px;border-right-color:#0e4164;border-right-style:solid;border-right-width:1px;border-spacing:0;border-top-color:#0e4164;border-top-left-radius:4px;border-top-right-radius:4px;border-top-style:solid;border-top-width:1px;box-shadow:rgba(255, 255, 255, 0.2) 0 1px 0 0 inset, rgba(0, 0, 0, 0.05) 0 1px 2px 0;color:#fff;cursor:pointer;direction:ltr;display:inline-block;font-family:Arial, Verdana, Helvetica, sans-serif;font-size:13.3333px;font-weight:400;line-height:16px;padding:4px 10px;text-align:center;text-decoration:none;text-shadow:#222 0 1px 1px;vertical-align:middle}
 </style>
 </head>
 <body>
-<h2 class="pagetitle">DataCite Metadata Generator - Kernel 3.1</h2>
+<h2 class="pagetitle">DataCite Metadata Generator - Kernel 4.0</h2>
 <div class="left">
 <h3 class="mandatory">Mandatory Elements</h3>
 <div class="form mandatory">
@@ -34,9 +35,9 @@ body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-f
 	</div>	
 	<span class="divider">&nbsp;</span>	
 	<div title="titles" class="section wrapper-tag">
-		<span class="tag-group-label">Title(s):</span>		
+		<span class="tag-group-label">Title(s):</span>
 		<button type="button" class="add group">+</button>
-		<div class="tag-group">			
+		<div class="tag-group">
 			<div title="title" class="tag">
 				<input class="full-width input-field tag-value" type="text" placeholder="[TITLE]" title="title" value="" />
 				<select class="half-width input-field tag-attribute" title="titleType"></select>
@@ -48,14 +49,20 @@ body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-f
 		<span class="tag-group-label">Creator(s):</span>
 		<button type="button" class="add group">+</button>
 		<div class="tag-group">
-			<div title="creator" class="tag">				
-				<div title="creatorName" class="tag">				
+			<div title="creator" class="tag">
+				<div title="creatorName" class="tag">
 					<input class="full-width input-field tag-value" type="text" placeholder="[CREATOR NAME]" title="creatorName" value="" />
-				</div>			
+				</div>
+				<div title="familyName" class="tag">
+					<input class="half-width input-field tag-value" type="text" placeholder="[FAMILY NAME] (optional)" title="familyName" value="" />
+				</div>
+				<div title="givenName" class="tag">
+					<input class="half-width input-field tag-value" type="text" placeholder="[GIVEN NAME] (optional)" title="givenName" value="" />
+				</div>
 				<div title="nameIdentifier" class="tag">
-					<input class="half-width input-field tag-value" type="text" placeholder="[NAME IDENTIFIER]" title="nameIdentifier" value="" />			
-					<input class="half-width input-field tag-attribute" type="text" placeholder="[NAME ID SCHEME]" title="nameIdentifierScheme" value="" />			
-					<input class="full-width input-field tag-attribute" type="text" placeholder="[IDENTIFIER SCHEME URI]" title="schemeURI" value="" />
+					<input class="half-width input-field tag-value" type="text" placeholder="[NAME IDENTIFIER]" title="nameIdentifier" value="" />
+					<input class="half-width input-field tag-attribute" type="text" placeholder="[NAME ID SCHEME]" title="nameIdentifierScheme" value="" />
+					<input class="unbounded-width input-field tag-attribute" type="text" placeholder="[IDENTIFIER SCHEME URI]" title="schemeURI" value="" /><button type="button" class="add single-tag">+</button>
 				</div>
 				<div title="affiliation" class="tag">
 					<input class="unbounded-width input-field tag-value" type="text" placeholder="[CREATOR AFFILIATION]" title="affiliation" value="" /><button type="button" class="add single-tag">+</button>
@@ -81,6 +88,16 @@ body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-f
 			</div>
 		</div>
 	</div>
+	<span class="divider">&nbsp;</span>
+	<div class="section">
+		<span class="tag-group-label">Resource Type:</span>
+		<div class="tag-group">
+			<div title="resourceType" class="tag">
+				<input class="half-width input-field tag-value" type="text" placeholder="[RESOURCE TYPE]" title="resourceType" value="" />
+				<select class="half-width input-field tag-attribute" title="resourceTypeGeneral"></select>
+			</div>
+		</div>
+	</div>	
 </div>
 <h3 class="recommended">+ Recommended Elements</h3>
 <div id="recommended" class="form recommended hidden">
@@ -92,6 +109,7 @@ body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-f
 				<input class="half-width input-field tag-value" type="text" placeholder="[SUBJECT]" title="subject" value="" />
 				<input class="half-width input-field tag-attribute" type="text" placeholder="[SUBJECT SCHEME]" title="subjectScheme" value="" />
 				<input class="full-width input-field tag-attribute" type="text" placeholder="[SUBJECT SCHEME URI]" title="schemeURI" value="" />
+				<input class="full-width input-field tag-attribute" type="text" placeholder="[SUBJECT VALUE URI]" title="valueURI" value="" />
 			</div>
 		</div>
 	</div>
@@ -103,12 +121,18 @@ body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-f
 			<div title="contributor" class="tag">
 				<div title="contributorName" class="tag">
 					<input class="half-width input-field tag-value" type="text" placeholder="[CONTRIBUTOR NAME]" title="contributorName" value="" />
-					<select class="half-width input-field tag-attribute" title="contributorType"></select>
+				</div>
+				<select class="half-width input-field tag-attribute" title="contributorType"></select>
+				<div title="familyName" class="tag">
+					<input class="half-width input-field tag-value" type="text" placeholder="[FAMILY NAME] (optional)" title="familyName" value="" />
+				</div>
+				<div title="givenName" class="tag">
+					<input class="half-width input-field tag-value" type="text" placeholder="[GIVEN NAME] (optional)" title="givenName" value="" />
 				</div>
 				<div title="nameIdentifier" class="tag">
 					<input class="half-width input-field tag-value" type="text" placeholder="[NAME IDENTIFIER]" title="nameIdentifier" value="" />
 					<input class="half-width input-field tag-attribute" type="text" placeholder="[NAME ID SCHEME]" title="nameIdentifierScheme" value="" />
-					<input class="full-width input-field tag-attribute" type="text" placeholder="[IDENTIFIER SCHEME URI]" title="schemeURI" value="" />
+					<input class="unbounded-width input-field tag-attribute" type="text" placeholder="[IDENTIFIER SCHEME URI]" title="schemeURI" value="" /><button type="button" class="add single-tag">+</button>
 				</div>
 				<div title="affiliation" class="tag">
 					<input class="unbounded-width input-field tag-value" type="text" placeholder="[CONTRIBUTOR AFFILIATION]" title="affiliation" value="" /><button type="button" class="add single-tag">+</button>
@@ -128,19 +152,9 @@ body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-f
 		</div>
 	</div>
 	<span class="divider">&nbsp;</span>
-	<div class="section">
-		<span class="tag-group-label">Resource Type:</span>
-		<div class="tag-group">
-			<div title="resourceType" class="tag">
-				<input class="half-width input-field tag-value" type="text" placeholder="[RESOURCE TYPE]" title="resourceType" value="" />
-				<select class="half-width input-field tag-attribute" title="resourceTypeGeneral"></select>
-			</div>
-		</div>
-	</div>
-	<span class="divider">&nbsp;</span>
 	<div title="relatedIdentifiers" class="section wrapper-tag">
 		<span class="tag-group-label">Related Identifier(s):</span>
-		<button type="button" class="add group">+</button>		
+		<button type="button" class="add group">+</button>
 		<div class="tag-group">
 			<div title="relatedIdentifier" class="tag">
 				<input class="full-width input-field tag-value" type="text" placeholder="[RELATED IDENTIFIER]" title="relatedIdentifier" value="" />
@@ -165,18 +179,71 @@ body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-f
 	</div>
 	<span class="divider">&nbsp;</span>	
 	<div title="geoLocations" class="section wrapper-tag">
-		<span class="tag-group-label">Geo Location:</span>
 		<button type="button" class="add group">+</button>
 		<div class="tag-group">
-			<div title="geolocation" class="tag">
-				<div title="geoLocationPoint" class="tag">
-					<input class="half-width input-field tag-value" type="text" placeholder="[GEO LOCATION POINT]" title="geoLocationPoint" value="" />
-				</div>
-				<div title="geoLocationBox" class="tag">
-					<input class="half-width input-field tag-value" type="text" placeholder="[GEO LOCATION BOX]" title="geoLocationBox" value="" />
-				</div>
+			<div title="geoLocation" class="tag">
+				<span class="tag-group-label">Geo Location Place:</span>
 				<div title="geoLocationPlace" class="tag">
 					<input class="full-width input-field tag-value" type="text" placeholder="[GEO LOCATION PLACE]" title="geoLocationPlace" value="" />
+				</div>			
+				<span class="tag-group-label">Geo Location Point:</span>
+				<div title="geoLocationPoint" class="tag">
+					<div title="pointLongitude" class="tag">
+						<input class="half-width input-field tag-value" type="text" placeholder="[POINT LONGITUDE]" title="pointLongitude" value="" />
+					</div>
+					<div title="pointLatitude" class="tag">
+						<input class="half-width input-field tag-value" type="text" placeholder="[POINT LATITUDE]" title="pointLatitude" value="" />
+					</div>					
+				</div>
+				<span class="tag-group-label">Geo Location Box:</span>
+				<div title="geoLocationBox" class="tag">
+					<div title="westBoundLongitude" class="tag">
+						<input class="half-width input-field tag-value" type="text" placeholder="[WEST BOUND LONGITUDE]" title="westBoundLongitude" value="" />
+					</div>
+					<div title="eastBoundLongitude" class="tag">
+						<input class="half-width input-field tag-value" type="text" placeholder="[EAST BOUND LONGITUDE]" title="eastBoundLongitude" value="" />
+					</div>
+					<div title="southBoundLatitude" class="tag">
+						<input class="half-width input-field tag-value" type="text" placeholder="[SOUTH BOUND LATITUDE]" title="southBoundLatitude" value="" />
+					</div>
+					<div title="northBoundLatitude" class="tag">
+						<input class="half-width input-field tag-value" type="text" placeholder="[NORTH BOUND LATITUDE]" title="northBoundLatitude" value="" />
+					</div>
+				</div>
+				<span class="tag-group-label">Geo Location Polygon:</span>
+				<div title="geoLocationPolygon" class="tag">
+					<div title="polygonPoint" class="tag">
+						<div title="pointLongitude" class="tag">
+							<input class="half-width-smaller input-field tag-value" type="text" placeholder="[POINT LONGITUDE]" title="pointLongitude" value="" />
+						</div>
+						<div title="pointLatitude" class="tag">
+							<input class="half-width-smaller input-field tag-value" type="text" placeholder="[POINT LATITUDE]" title="pointLatitude" value="" />
+						</div>
+					</div>
+					<div title="polygonPoint" class="tag">
+						<div title="pointLongitude" class="tag">
+							<input class="half-width-smaller input-field tag-value" type="text" placeholder="[POINT LONGITUDE]" title="pointLongitude" value="" />
+						</div>
+						<div title="pointLatitude" class="tag">
+							<input class="half-width-smaller input-field tag-value" type="text" placeholder="[POINT LATITUDE]" title="pointLatitude" value="" />
+						</div>
+					</div>
+					<div title="polygonPoint" class="tag">
+						<div title="pointLongitude" class="tag">
+							<input class="half-width-smaller input-field tag-value" type="text" placeholder="[POINT LONGITUDE]" title="pointLongitude" value="" />
+						</div>
+						<div title="pointLatitude" class="tag">
+							<input class="half-width-smaller input-field tag-value" type="text" placeholder="[POINT LATITUDE]" title="pointLatitude" value="" />
+						</div>
+					</div>
+					<div title="polygonPoint" class="tag">
+						<div title="pointLongitude" class="tag">
+							<input class="half-width-smaller input-field tag-value" type="text" placeholder="[POINT LONGITUDE]" title="pointLongitude" value="" />
+						</div>
+						<div title="pointLatitude" class="tag">
+							<input class="half-width-smaller input-field tag-value" type="text" placeholder="[POINT LATITUDE]" title="pointLatitude" value="" />
+						</div><button type="button" class="add single-tag">+</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -240,6 +307,29 @@ body{font-family:sans-serif}.hidden{display:none}.visible{display:block}.input-f
 			<div title="rights" class="tag">
 				<input class="full-width input-field tag-value" type="text" placeholder="[RIGHTS]" title="rights" value="" />
 				<input class="full-width input-field tag-attribute" type="text" placeholder="[RIGHTS URI]" title="rightsURI" value="" />
+			</div>
+		</div>
+	</div>
+	<span class="divider">&nbsp;</span>
+	<div title="fundingReferences" class="section wrapper-tag">
+		<span class="tag-group-label">Funding Reference:</span>
+		<button type="button" class="add group">+</button>
+		<div class="tag-group">
+			<div title="fundingReference" class="tag">
+				<div title="funderName" class="tag">
+					<input class="full-width input-field tag-value" type="text" placeholder="[FUNDER NAME]" title="funderName" value="" />
+				</div>
+				<div title="funderIdentifier" class="tag">
+					<input class="half-width input-field tag-value" type="text" placeholder="[FUNDER IDENTIFIER]" title="funderIdentifier" value="" />
+					<select class="half-width input-field tag-attribute" title="funderIdentifierType"></select>
+				</div>
+				<div title="awardNumber" class="tag">
+					<input class="half-width input-field tag-value" type="text" placeholder="[AWARD NUMBER]" title="awardNumber" value="" />
+					<input class="half-width input-field tag-attribute" type="text" placeholder="[AWARD URI]" title="awardURI" value="" />
+				</div>
+				<div title="awardTitle" class="tag">
+					<input class="full-width input-field tag-value" type="text" placeholder="[AWARD TITLE]" title="awardTitle" value="" />
+				</div>
 			</div>
 		</div>
 	</div>	

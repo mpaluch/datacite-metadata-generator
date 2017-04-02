@@ -149,7 +149,7 @@ function processTag(tag, indent){
 	if (xml.length > 0){
 		xml = tab(indent) + ota(tagName,attr) + br() + xml + tab(indent) + ct(tagName) + br();
 	}
-	else if(typeof value !== "undefined" && value.length > 0){
+	else if(typeof value !== "undefined" && (value.length > 0 || ($(tag).hasClass("allow-empty") && attr.length > 0))){
 		xml = tab(indent) + ota(tagName,attr) + value + ct(tagName) + br();
 	}
 	

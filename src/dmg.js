@@ -13,7 +13,7 @@ $(document).ready(function() {
     var xml = header;
     $("div.section").each(function(){
     	xml += process($(this));
-    })
+    });
     xml += ct("resource");
     metadata = xml;
     $("div.right code").text(xml);
@@ -117,7 +117,7 @@ function process(section){
 	
 	$(section).find(".tag-group>.tag").each(function(){
 		xml += processTag(this,indent);
-	})
+	});
 	
 	if (xml.length > 0){
 		if (isWrapper){
@@ -277,19 +277,21 @@ var downloadFile = function() {
     $("span#output").html("");
   }
   var bb = new Blob([metadata], {type:MIME_TYPE});
-  var a = document.createElement("a");
-  a.download = "metadata.xml";
-  a.href = window.URL.createObjectURL(bb);
-  a.textContent = "Click here to Save: metadata.xml";
-  a.setAttribute("data-downloadurl", [MIME_TYPE, a.download, a.href].join(":"));
-  a.classList.add("button");
-  a.onclick = function(e) {
-    if ($(this).is(":disabled")) {
-      return false;
-    }
-    cleanUp(this);
-  };
-  $(a).appendTo($("span#output"));
+  if (navigator.msSaveBlob) {
+      navigator.msSaveBlob(bb, "metadata.xml");
+  } else {
+    var a = document.createElement("a");
+    a.download = "metadata.xml";
+    a.href = window.URL.createObjectURL(bb);
+    a.onclick = function(e) {
+      if ($(this).is(":disabled")) {
+        return false;
+      }
+      cleanUp(this);
+    };
+    $(a).appendTo($("span#output"));
+    $(a)[0].click();
+  }
 };
 
 function save() {
@@ -299,4 +301,3 @@ function save() {
     downloadFile();
   }
 }
-;
